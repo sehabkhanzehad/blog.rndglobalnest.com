@@ -7,6 +7,7 @@
         ->where('status', 1)
         ->orderBy('name', 'asc')
         ->get(['id', 'name', 'slug', 'status']);
+
 @endphp
 @extends('blog.layouts.main')
 @section('content')
@@ -26,11 +27,17 @@
                                     <span class="text-uppercase">{{ $latestFirstBlog->views }} Views</span>
                                 </div>
                                 <img loading="lazy" decoding="async" src="{{ asset($latestFirstBlog->image) }}"
-                                    alt="Post Thumbnail" class="w-100">
+                                    alt="Post Thumbnail" class="w-100" style="height:400px; width:100%">
                             </div>
                         </a>
+                        @php
+                            $author = \App\Models\User::where('id', $latestFirstBlog->admin_id)->first();
+                        @endphp
                         <div class="card-body px-0 pb-1">
-                            <ul class="post-meta mb-2">
+                            <ul class="post-meta mb-2 d-flex justify-content-between">
+                                <li>
+                                    <a style="cursor: default">{{ $author->name }}</a>
+                                </li>
                                 <li>
                                     <a
                                         href="{{ route('front.blog.categoryWiseBlogs', $latestFirstBlog->category->slug) }}">{{ $latestFirstBlog->category->name }}</a>
@@ -43,7 +50,7 @@
                                 heading by following markdownify rules. For example: use # for heading 1 and
                                 use ###### for heading 6.</p> --}}
                             <div class="content"> <a class="read-more-btn"
-                                    href="{{ route('front.blog.details', ['id' => $latestFirstBlog->id, 'slug' => $latestFirstBlog->slug]) }}">{{ $latestFirstBlog->title }}">Read
+                                    href="{{ route('front.blog.details', ['id' => $latestFirstBlog->id, 'slug' => $latestFirstBlog->slug]) }}">Read
                                     Full
                                     Article</a>
                             </div>
@@ -66,8 +73,13 @@
                                         alt="Post Thumbnail" class="w-100">
                                 </div>
                             </a>
+                            @php
+                                $authorX = \App\Models\User::where('id', $blog->admin_id)->first();
+                            @endphp
                             <div class="card-body px-0 pb-0">
-                                <ul class="post-meta mb-2">
+                                <ul class="post-meta mb-2 d-flex justify-content-between">
+                                    <li><a style="cursor: default">{{ $authorX->name }}</a>
+                                    </li>
                                     <li> <a
                                             href="{{ route('front.blog.categoryWiseBlogs', $blog->category->slug) }}">{{ $blog->category->name }}</a>
                                     </li>

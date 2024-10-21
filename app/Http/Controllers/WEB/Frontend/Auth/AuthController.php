@@ -278,18 +278,18 @@ class AuthController extends Controller
             }
 
 
-            if (Auth::attempt(['email' => $email, 'password' => $password])) {
-                // return response()->json([
-                //     'status' => 'success',
-                //     'message' => 'Login Success',
-                //     'data' => Auth::user(),
-                //     'url' => route('front.home')
-                // ]);
+            // if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            //     // return response()->json([
+            //     //     'status' => 'success',
+            //     //     'message' => 'Login Success',
+            //     //     'data' => Auth::user(),
+            //     //     'url' => route('front.home')
+            //     // ]);
 
-                return redirect()->route('front.home');
-            } else {
-                return back()->with('error_msg', 'Invalid credentials');
-            }
+            //     return redirect()->route('front.home');
+            // } else {
+            //     return back()->with('error_msg', 'Invalid credentials');
+            // }
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',

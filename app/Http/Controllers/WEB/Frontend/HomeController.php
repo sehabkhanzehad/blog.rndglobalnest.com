@@ -13,6 +13,7 @@ use App\Models\ChildCategory;
 use App\Models\FlashSaleProduct;
 use App\Models\HomeBottomSetting;
 use App\Models\CustomPage;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 
@@ -20,20 +21,21 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $latestBlogs = Blog::with('category', 'comments')
+        $latestBlogs = Blog::with('category', 'comments', 'admin')
             ->latest()
             ->paginate(10);
 
-        $popularFirstBlog = Blog::with('category', 'comments')
+        $popularFirstBlog = Blog::with('category', 'comments', 'admin')
             ->orderBy('views', 'desc')
             ->first();
 
-        // return $popularFirstBlog;
+
+        // return $latestBlogs;
         // die();
 
         return view('blog.pages.index', [
             "home_bottom_settings" => HomeBottomSetting::all(),
-            "latestFirstBlog" => Blog::with('category', 'comments')->latest()->first(),
+            "latestFirstBlog" => Blog::with('category', 'comments', 'admin')->latest()->first(),
             "latestBlogs" => $latestBlogs,
             "categories" => BlogCategory::with([
                 'blogs' => function ($query) {

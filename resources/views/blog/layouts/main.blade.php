@@ -20,18 +20,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <meta name="description" content="This is meta description">
     <meta name="author" content="Themefisher">
-    <link rel="shortcut icon" href="{{ asset('blog') }}/images/favicon.png" type="image/x-icon">
-    <link rel="icon" href="{{ asset('blog') }}/images/favicon.png" type="{{ asset('blog') }}/image/x-icon">
+    <link rel="shortcut icon" href="{{ asset(siteInfo()->favicon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset(siteInfo()->favicon) }}" type="image/x-icon">
 
     <!-- theme meta -->
     <meta name="theme-name" content="reporter" />
 
     <!-- # Bangla Web Font -->
-    <link href="https://fonts.maateen.me/adorsho-lipi/font.css" rel="stylesheet">
+    <link href="https://fonts.maateen.me/bangla/font.css" rel="stylesheet">
 
     <style>
         body {
-            font-family: 'AdorshoLipi', Arial, sans-serif !important;
+            font-family: 'Bangla', Arial, sans-serif !important;
         }
     </style>
     <!-- # Google Fonts -->
@@ -40,7 +40,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Neuton:wght@700&family=Work+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <!-- # CSS Plugins -->
     <link rel="stylesheet" href="{{ asset('blog') }}/plugins/bootstrap/bootstrap.min.css">
 
@@ -131,6 +131,8 @@
 
     <!-- Main Script -->
     <script src="{{ asset('blog') }}/js/script.js"></script>
+
+    @yield("script")
 
 </body>
 

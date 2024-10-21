@@ -41,7 +41,7 @@
                                                 class="text-uppercase">{{ $popularFirstBlog->views }} Views</span>
                                         </div>
                                         <img loading="lazy" decoding="async" src="{{ asset($popularFirstBlog->image) }}"
-                                            alt="Post Thumbnail" class="w-100">
+                                            alt="Post Thumbnail" class="w-100" style="height:180px; width:100%">
                                     </div>
                                 </a>
                                 <div class="card-body px-0 pb-1">

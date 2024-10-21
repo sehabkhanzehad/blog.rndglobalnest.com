@@ -28,29 +28,26 @@ class BlogController extends Controller
     }
     public function commentStore(Request $request)
     {
-        try {
-            $blogId = $request->input('blog_id');
-            $name = $request->input('name');
-            $email = $request->input('email');
-            $commment = $request->input('comment');
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'comment' => 'required',
+        ]);
 
-            BlogComment::create([
-                'blog_id' => $blogId,
-                'name' => $name,
-                'email' => $email,
-                'comment' => $commment
-            ]);
+        $blogId = $request->input('blog_id');
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $commment = $request->input('comment');
 
-            return response()->json([
-                'status' => "success",
-                'message' => 'Comment submited successfully',
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => "failed",
-                'message' => 'Something went wrong',
-                'error' => $th->getMessage(),
-            ], 500);
-        }
+        BlogComment::create([
+            'blog_id' => $blogId,
+            'name' => $name,
+            'email' => $email,
+            'comment' => $commment
+        ]);
+
+
+        return redirect()->back()->with('success', 'Comment added successfully')->with('scrollTo', 'comment-id');
+
     }
 }
