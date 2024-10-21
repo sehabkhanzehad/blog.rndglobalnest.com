@@ -54,7 +54,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light px-0">
                 <a class="navbar-brand order-1 py-0" href="{{ route('front.home') }}">
-                    <img loading="prelaod" decoding="async" class="img-fluid" src="{{ asset(siteInfo()->logo) }}"
+                    <img width="100px" height="50px" loading="prelaod" decoding="async" class="img-fluid" src="{{ asset(siteInfo()->logo) }}"
                         alt="Reporter Hugo">
                 </a>
                 <div class="navbar-actions order-3 ml-0 ml-md-4">
@@ -105,7 +105,7 @@
             <div class="row">
                 <div class="col-lg-10 mx-auto text-center">
                     <a class="d-inline-block mb-4 pb-2" href="{{ route('front.home') }}">
-                        <img loading="prelaod" decoding="async" class="img-fluid bg-white"
+                        <img width="100px" height="50px" loading="prelaod" decoding="async" class="img-fluid bg-white"
                             style="border-radius: 0px 8px 0px 8px;" src="{{ asset(siteInfo()->logo) }}"
                             alt="Reporter Hugo">
                     </a>
