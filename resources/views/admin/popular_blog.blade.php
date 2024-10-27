@@ -94,7 +94,7 @@
 
 <script>
     function deleteData(id){
-        $("#deleteForm").attr("action",'{{ url("admin/popular-blog/") }}'+"/"+id)
+        $("#deleteForm").attr("action",'{{ url("admin/recommended-blog/") }}'+"/"+id)
     }
     function changePopularBlogStatus(id){
         var isDemo = "{{ env('APP_MODE') }}"
