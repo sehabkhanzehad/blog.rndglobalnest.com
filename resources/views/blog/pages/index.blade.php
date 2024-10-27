@@ -27,7 +27,7 @@
                                     <span class="text-uppercase">{{ $latestFirstBlog->views }} Views</span>
                                 </div>
                                 <img loading="lazy" decoding="async" src="{{ asset($latestFirstBlog->image) }}"
-                                    alt="Post Thumbnail" class="w-100" style="height:400px; width:100%">
+                                    alt="Post Thumbnail" class="w-100">
                             </div>
                         </a>
                         @php

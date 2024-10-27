@@ -22,10 +22,12 @@ class HomeController extends Controller
     public function index()
     {
         $latestBlogs = Blog::with('category', 'comments', 'admin')
+            ->where('status', 1)
             ->latest()
             ->paginate(10);
 
         $popularFirstBlog = Blog::with('category', 'comments', 'admin')
+            ->where('status', 1)
             ->orderBy('views', 'desc')
             ->first();
 
@@ -35,7 +37,7 @@ class HomeController extends Controller
 
         return view('blog.pages.index', [
             "home_bottom_settings" => HomeBottomSetting::all(),
-            "latestFirstBlog" => Blog::with('category', 'comments', 'admin')->latest()->first(),
+            "latestFirstBlog" => Blog::with('category', 'comments', 'admin')->where('status', 1)->latest()->first(),
             "latestBlogs" => $latestBlogs,
             "categories" => BlogCategory::with([
                 'blogs' => function ($query) {
@@ -70,7 +72,7 @@ class HomeController extends Controller
     {
         $searchValue = $request->get('search');
 
-        $blogs = Blog::with('category')
+        $blogs = Blog::with('category')->where('status', 1)
             ->where('title', 'like', '%' . $request->get('search') . '%')
             ->orWhere('slug', 'like', '%' . $request->get('search') . '%')
             ->orWhere('description', 'like', '%' . $request->get('search') . '%')

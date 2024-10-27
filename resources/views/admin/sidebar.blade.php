@@ -71,7 +71,7 @@
                             href="{{ route('admin.blog.index') }}">{{ __('admin.Blogs') }}</a></li>
 
                     <li class="{{ Route::is('admin.popular-blog.*') ? 'active' : '' }}"><a class="nav-link"
-                            href="{{ route('admin.popular-blog.index') }}">{{ __('admin.Popular Blogs') }}</a></li>
+                            href="{{ route('admin.popular-blog.index') }}">Recommended Blogs</a></li>
 
                     <li class="{{ Route::is('admin.blog-comment.*') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin.blog-comment.index') }}">{{ __('admin.Comments') }}</a></li>

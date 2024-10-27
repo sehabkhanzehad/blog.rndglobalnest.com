@@ -156,7 +156,7 @@ Route::group(['middleware' => ['demo', 'XSS']], function () {
         Route::resource('blog', BlogController::class); // Add
         Route::put('blog-status/{id}', [BlogController::class, 'changeStatus'])->name('blog.status');
 
-        Route::resource('popular-blog', PopularBlogController::class); // Add
+        Route::resource('/recommended-blog', PopularBlogController::class)->names('popular-blog'); // Add
         Route::put('popular-blog-status/{id}', [PopularBlogController::class, 'changeStatus'])->name('popular-blog.status');
 
         Route::resource('blog-comment', BlogCommentController::class); // Add

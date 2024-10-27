@@ -16,8 +16,11 @@ class BlogController extends Controller
         $blog = Blog::with('category', 'comments')->where('slug', $slug)->where('id', $id)->first();
         $blog->increment("views", 1);
 
+        $relatedBlogs = Blog::with('category', 'comments')->where('status', 1)->where('id', '!=', $id)->where('blog_category_id', $blog->blog_category_id)->take(9)->get();
+
         return view("blog.pages.blog-details", [
             "blog" => $blog,
+            "relatedBlogs" => $relatedBlogs
         ]);
     }
     function categoryWiseBlogs($slug)

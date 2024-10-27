@@ -1,17 +1,17 @@
 @extends('admin.master_layout')
 @section('title')
-<title>{{__('admin.Popular Blog')}}</title>
+<title>Recommended Blogs</title>
 @endsection
 @section('admin-content')
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{__('admin.Popular Blog')}}</h1>
+            <h1>Recommended Blogs</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">{{__('admin.Dashboard')}}</a></div>
               <div class="breadcrumb-item active"><a href="{{ route('admin.blog.index') }}">{{__('admin.Blogs')}}</a></div>
-              <div class="breadcrumb-item">{{__('admin.Popular Blog')}}</div>
+              <div class="breadcrumb-item">Recommended Blogs</div>
             </div>
           </div>
 
@@ -27,6 +27,9 @@
                                 <select name="blog_id" id="" class="form-control select2" required>
                                     <option value="">{{__('admin.Select Blog')}}</option>
                                     @foreach ($blogs as $blog)
+                                    @if(\App\Models\PopularPost::where('blog_id', $blog->id)->exists())
+                                        @continue
+                                    @endif
                                         <option value="{{ $blog->id }}">{{ $blog->title }}</option>
                                     @endforeach
                                 </select>

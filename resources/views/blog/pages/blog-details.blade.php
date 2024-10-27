@@ -3,8 +3,7 @@
     <div class="row">
         <div class="col-lg-8 mb-5 mb-lg-0">
             <article>
-                <img loading="lazy" decoding="async" src="{{ asset($blog->image) }}" alt="Post Thumbnail" class="w-100"
-                    style="height:400px; width:100%">
+                <img loading="lazy" decoding="async" src="{{ asset($blog->image) }}" alt="Post Thumbnail" class="w-100">
 
                 <ul class="post-meta mb-2 mt-4 d-flex justify-content-between">
                     <li>
@@ -101,9 +100,9 @@
             <div class="comments" id ="comment-id">
                 {{-- show comments with  small icons avatar, name, time in one line then newline and comment  --}}
                 <h3 class="text-left">Comments</h3>
-                @if (session("success"))
-                    <div class="alert alert-success text-center">{{ session("success") }}</div>
-                    @endif
+                @if (session('success'))
+                    <div class="alert alert-success text-center">{{ session('success') }}</div>
+                @endif
                 @foreach ($blog->comments as $comment)
                     <div class="comment">
                         <div class="d-flex">
@@ -120,7 +119,7 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="comment-form" >
+                <div class="comment-form">
                     <h3 class="text-left">Leave a Comment</h3>
 
                     <form action="{{ route('front.blog.comment') }}" method="post">
@@ -128,21 +127,21 @@
                         <div class="form-group">
                             <input type="text" name="name" required class="form-control" placeholder="Name">
                             <input type="hidden" name="blog_id" value="{{ $blog->id }}" id="">
-                           {{-- show error message --}}
-                           @error("name")
-                           <span class="text-danger">{{ $message }}</span>
-                           @enderror
+                            {{-- show error message --}}
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <input type="email" name="email" required class="form-control" placeholder="Email">
-                            @error("email")
-                            <span class="text-danger">{{ $message }}</span>
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" rows="5" required name="comment" placeholder="Comment"></textarea>
-                            @error("comment")
-                            <span class="text-danger">{{ $message }}</span>
+                            @error('comment')
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -151,7 +150,47 @@
                     </form>
                 </div>
             </div>
-
+            @if ($relatedBlogs->count() > 0)
+                <div class="related-post mt-5">
+                    <hr>
+                    <h2 class="section-title mb-3">Related Articles</h2>
+                    <div class="row">
+                        @foreach ($relatedBlogs as $relatedBlog)
+                            <div class="col-lg-4 col-md-6 border-bottom p-3">
+                                <div class="post">
+                                    <a
+                                        href="{{ route('front.blog.details', ['id' => $relatedBlog->id, 'slug' => $relatedBlog->slug]) }}">
+                                        <img loading="lazy" decoding="async" src="{{ asset($relatedBlog->image) }}"
+                                            alt="Post Thumbnail" class="w-100">
+                                    </a>
+                                    <div class="post-content">
+                                        <ul class="post-meta mb-2 mt-4 d-flex justify-content-between">
+                                            <li>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" style="margin-right:5px;margin-top:-4px"
+                                                    class="text-dark" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M5.5 10.5A.5.5 0 0 1 6 10h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+                                                    <path
+                                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
+                                                    <path
+                                                        d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z" />
+                                                </svg> <span>{{ $relatedBlog->created_at->format('M y') }}</span>
+                                            </li>
+                                            <li> <a
+                                                    href="{{ route('front.blog.categoryWiseBlogs', $relatedBlog->category->slug) }}">{{ $relatedBlog->category->name }}</a>
+                                            </li>
+                                        </ul>
+                                        <h4><a
+                                                href="{{ route('front.blog.details', ['id' => $relatedBlog->id, 'slug' => $relatedBlog->slug]) }}">{{ $relatedBlog->title }}</a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
 
 
 
@@ -164,15 +203,17 @@
         @include('blog.component.widgets')
     </div>
 @endsection
-@section("script")
-@if (session('scrollTo'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const element = document.getElementById('{{ session('scrollTo') }}');
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    </script>
-@endif
+@section('script')
+    @if (session('scrollTo'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const element = document.getElementById('{{ session('scrollTo') }}');
+                if (element) {
+                    element.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        </script>
+    @endif
 @endsection
