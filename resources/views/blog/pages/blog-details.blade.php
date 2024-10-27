@@ -107,7 +107,7 @@
                     <div class="comment">
                         <div class="d-flex">
                             <div class="avatar mr-3">
-                                <img class="rounded-circle"
+                                <img width="50" height="50" class="rounded-circle"
                                     src="https://ui-avatars.com/api/?name={{ $comment->name }}&background=random"
                                     alt="User Avatar">
                             </div>
