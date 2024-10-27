@@ -28,7 +28,7 @@
                                     <th width="30%">{{__('admin.Title')}}</th>
                                     <th width="15%">{{__('admin.Category')}}</th>
                                     <th width="10%">{{__('admin.Image')}}</th>
-                                    <th width="10%">{{__('admin.Show Homepage')}}</th>
+                                    {{-- <th width="10%">{{__('admin.Show Homepage')}}</th> --}}
                                     <th width="15%">{{__('admin.Status')}}</th>
                                     <th width="15%">{{__('admin.Action')}}</th>
                                   </tr>
@@ -40,13 +40,13 @@
                                         <td><a href="{{ $frontend_view.$blog->slug }}">{{ $blog->title }}</a></td>
                                         <td>{{ $blog->category->name }}</td>
                                         <td><img src="{{ asset($blog->image) }}" width="80px" height="80px" class="rounded-circle" alt=""></td>
-                                        <td>
+                                        {{-- <td>
                                             @if ($blog->show_homepage)
                                                 <span class="badge badge-success">{{__('admin.Yes')}}</span>
                                             @else
                                             <span class="badge badge-danger">{{__('admin.No')}}</span>
                                             @endif
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             @if($blog->status == 1)
                                             <a href="javascript:;" onclick="changeBlogStatus({{ $blog->id }})">
