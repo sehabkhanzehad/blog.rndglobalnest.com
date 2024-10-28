@@ -24,47 +24,47 @@
                     <li>
                         Share this:
                         {{-- here share this with social media show with icon fontawesome --}}
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fab fa-facebook-f"></i>
                         </a>
 
-                        <a href="https://www.instagram.com/?url={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        <a href="https://www.instagram.com/?url={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fab fa-instagram"></i>
                         </a>
 
-                        <a href="https://twitter.com/share?url={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        <a href="https://twitter.com/share?url={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fab fa-twitter"></i>
                         </a>
 
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
 
-                        {{-- <a href="https://www.pinterest.com/pin/create/button/?url={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        {{-- <a href="https://www.pinterest.com/pin/create/button/?url={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fab fa-pinterest-p"></i>
                         </a> --}}
 
-                        {{-- <a href="https://www.reddit.com/submit?url={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        {{-- <a href="https://www.reddit.com/submit?url={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fab fa-reddit-alien"></i>
                         </a> --}}
 
-                        <a href="https://telegram.me/share/url?url={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        <a href="https://telegram.me/share/url?url={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fab fa-telegram-plane"></i>
                         </a>
 
-                        <a href="https://wa.me/?text={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        <a href="https://wa.me/?text={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fab fa-whatsapp"></i>
                         </a>
 
-                        {{-- <a href="mailto:?body={{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}"
+                        {{-- <a href="mailto:?body={{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}"
                             target="_blank" class="text-dark" style="margin-right:5px">
                             <i class="fas fa-envelope"></i>
                         </a> --}}
@@ -74,12 +74,24 @@
 
                     </li>
                 </ul>
+                {{-- here show writer position and auto generated image with name with third party api --}}
+
 
 
                 <h1 class="my-0">{{ $blog->title }}</h1>
                 <ul class="post-meta mb-2 mt-4 d-flex justify-content-between">
-                    <li>Author:
-                        <a style="cursor:default">{{ \App\Models\User::find($blog->admin_id)->name }}</a>
+                    <li>
+                        <div class="d-flex align-items-center">
+                            <div class="avatar mr-3">
+                                <img style="max-width: none" class="rounded-circle"
+                                    src="https://ui-avatars.com/api/?name={{ \App\Models\User::find($blog->admin_id)->name }}&background=random"
+                                    alt="User Avatar">
+                            </div>
+                            <div>
+                                <h4 class="my-0">{{ \App\Models\User::find($blog->admin_id)->name }}</h4>
+                                <span>{{ \App\Models\User::find($blog->admin_id)->designation }}</span>
+                            </div>
+                        </div>
                     </li>
 
                     <li>Category: <a
@@ -159,7 +171,7 @@
                             <div class="col-lg-4 col-md-6 border-bottom p-3">
                                 <div class="post">
                                     <a
-                                        href="{{ route('front.blog.details', ['id' => $relatedBlog->id, 'slug' => $relatedBlog->slug]) }}">
+                                        href="{{ route('front.blog.details', ['category' => $relatedBlog->category->slug, 'id' => $relatedBlog->id]) }}">
                                         <img loading="lazy" decoding="async" src="{{ asset($relatedBlog->image) }}"
                                             alt="Post Thumbnail" class="w-100">
                                     </a>
@@ -182,7 +194,7 @@
                                             </li>
                                         </ul>
                                         <h4><a
-                                                href="{{ route('front.blog.details', ['id' => $relatedBlog->id, 'slug' => $relatedBlog->slug]) }}">{{ $relatedBlog->title }}</a>
+                                                href="{{ route('front.blog.details', ['category' => $relatedBlog->category->slug,'id' => $relatedBlog->id]) }}">{{ $relatedBlog->title }}</a>
                                         </h4>
                                     </div>
                                 </div>

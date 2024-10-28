@@ -142,7 +142,7 @@
                 </li>
             @endif
 
-            {{-- @php
+            @php
                 $logedInAdmin = Auth::guard('admin')->user();
             @endphp
 
@@ -164,7 +164,7 @@
                     </a></li>
             @endif
 
-            @if (auth()->user()->can('admin.customer-list') || auth()->user()->can('admin.customer-show') || auth()->user()->can('admin.pending-customer-list') || auth()->user()->can('admin.seller-show') || auth()->user()->can('admin.seller-shop-detail') || auth()->user()->can('admin.seller-reviews') || auth()->user()->can('admin.show-seller-review-details') || auth()->user()->can('admin.send-email-to-seller') || auth()->user()->can('admin.email-history') || auth()->user()->can('admin.product-by-seller') || auth()->user()->can('admin.send-email-to-all-customer'))
+            {{-- @if (auth()->user()->can('admin.customer-list') || auth()->user()->can('admin.customer-show') || auth()->user()->can('admin.pending-customer-list') || auth()->user()->can('admin.seller-show') || auth()->user()->can('admin.seller-shop-detail') || auth()->user()->can('admin.seller-reviews') || auth()->user()->can('admin.show-seller-review-details') || auth()->user()->can('admin.send-email-to-seller') || auth()->user()->can('admin.email-history') || auth()->user()->can('admin.product-by-seller') || auth()->user()->can('admin.send-email-to-all-customer'))
                 <li
                     class="nav-item dropdown {{ Route::is('admin.customer-list') || Route::is('admin.customer-show') || Route::is('admin.pending-customer-list') || Route::is('admin.seller-show') || Route::is('admin.seller-shop-detail') || Route::is('admin.seller-reviews') || Route::is('admin.show-seller-review-details') || Route::is('admin.send-email-to-seller') || Route::is('admin.email-history') || Route::is('admin.product-by-seller') || Route::is('admin.send-email-to-all-seller') || Route::is('admin.send-email-to-all-customer') ? 'active' : '' }}">
 
@@ -189,7 +189,7 @@
 
                     </ul>
                 </li>
-            @endif
+            @endif --}}
 
             @if (auth()->user()->can('admin.user.role.index'))
                 <li class="{{ Route::is('admin.user.role.index') ? 'active' : '' }}"><a class="nav-link"
@@ -211,7 +211,7 @@
                         </div>
                         <span style="color:black">Permission list</span>
                     </a></li>
-            @endif --}}
+            @endif
 
 
         </ul>

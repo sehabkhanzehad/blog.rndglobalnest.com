@@ -359,7 +359,7 @@ Route::group(['as' => 'front.'], function () {
 
     });
     Route::get("/blogs/{slug}", [BlogBlogController::class, "categoryWiseBlogs"] )->name("blog.categoryWiseBlogs");
-    Route::get("/{slug}/{id}", [BlogBlogController::class, "blogDetails"] )->name("blog.details");
+    Route::get("/{category}/{id}", [BlogBlogController::class, "blogDetails"] )->name("blog.details");
     Route::post("/comment", [BlogBlogController::class, "commentStore"])->name("blog.comment");
 
 

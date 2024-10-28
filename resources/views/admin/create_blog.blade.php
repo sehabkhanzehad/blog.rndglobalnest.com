@@ -25,6 +25,13 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group col-12">
+                                    {{-- select custom date and time --}}
+                                    <label>Date and Time<span class="text-danger">*</span></label>
+                                    <input type="datetime-local" class="form-control"  name="date_time" value="{{ now()->format('Y-m-d H:i:s') }}">
+                                </div>
+
+                                <div class="form-group col-12">
+
                                     <label>{{__('admin.Thumbnail Image Preview')}}</label>
                                     <div>
                                         <img id="preview-img" class="admin-img" src="{{ asset('uploads/website-images/preview.png') }}" alt="">
@@ -41,10 +48,10 @@
                                     <input type="text" id="title" class="form-control"  name="title" value="{{ old('title') }}">
                                 </div>
 
-                                <div class="form-group col-12">
+                                {{-- <div class="form-group col-12">
                                     <label>{{__('admin.Slug')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="slug" class="form-control"  name="slug" value="{{ old('slug') }}">
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group col-12">
                                     <label>{{__('admin.Category')}} <span class="text-danger">*</span></label>
@@ -62,18 +69,21 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Show Homepage ?')}}  <span class="text-danger">*</span></label>
+                                    <label>Is cover?<span class="text-danger">*</span></label>
                                     <select name="show_homepage" class="form-control">
-                                        <option value="0">{{__('admin.No')}}</option>
-                                        <option value="1">{{__('admin.Yes')}}</option>
+                                        <option value="">No</option>
+                                        <option value="cover1">Cover 1</option>
+                                        <option value="cover2">Cover 2</option>
+                                        <option value="cover3">Cover 3</option>
+                                        <option value="cover4">Cover 4</option>
                                     </select>
                                 </div>
 
-                                <div class="form-group col-12">
+                                <div class="form-group col-12 d-none">
                                     <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
                                         <option value="1">{{__('admin.Active')}}</option>
-                                        <option value="0">{{__('admin.Inactive')}}</option>
+                                        {{-- <option value="0">{{__('admin.Inactive')}}</option> --}}
                                     </select>
                                 </div>
 
@@ -102,22 +112,23 @@
       </div>
 
 <script>
-    (function($) {
-        "use strict";
-        $(document).ready(function () {
-            $("#title").on("focusout",function(e){
-                $("#slug").val(convertToSlug($(this).val()));
-            })
-        });
-    })(jQuery);
+    // (function($) {
+    //     "use strict";
+    //     $(document).ready(function () {
+    //         $("#title").on("focusout",function(e){
+    //             $("#slug").val(convertToSlug($(this).val()));
+    //         })
+    //     });
+    // })(jQuery);
 
-    function convertToSlug(Text)
-        {
-            return Text
-                .toLowerCase()
-                .replace(/[^\w ]+/g,'')
-                .replace(/ +/g,'-');
-        }
+    // function convertToSlug(Text)
+    //     {
+    //         return Text
+    //             // .toLowerCase()
+
+    //             .replace(/[^\w ]+/g,'')
+    //             .replace(/ +/g,'-');
+    //     }
 
     function previewThumnailImage(event) {
         var reader = new FileReader();

@@ -38,6 +38,26 @@ class HomeController extends Controller
         return view('blog.pages.index', [
             "home_bottom_settings" => HomeBottomSetting::all(),
             "latestFirstBlog" => Blog::with('category', 'comments', 'admin')->where('status', 1)->latest()->first(),
+            "cover1" => Blog::with('category', 'comments', 'admin')
+                            ->where('show_homepage', 'cover1')
+                            ->where('status', 1)
+                            ->first(),
+        
+            "cover2" => Blog::with('category', 'comments', 'admin')
+                            ->where('show_homepage', 'cover2')
+                            ->where('status', 1)
+                            ->first(),
+
+            "cover3" => Blog::with('category', 'comments', 'admin')
+                            ->where('show_homepage', 'cover3')
+                            ->where('status', 1)
+                            ->first(),
+
+            "cover4" => Blog::with('category', 'comments', 'admin')
+                            ->where('show_homepage', 'cover4')
+                            ->where('status', 1)
+                            ->first(),
+
             "latestBlogs" => $latestBlogs,
             "categories" => BlogCategory::with([
                 'blogs' => function ($query) {

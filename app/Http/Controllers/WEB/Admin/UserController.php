@@ -17,7 +17,7 @@ class UserController extends Controller
     function index() {
       if(!auth()->user()->can('employee.index')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $emploies = User::where('status', 2)->get();
         return view('admin.user.index', compact('emploies'));
     }
@@ -25,7 +25,7 @@ class UserController extends Controller
     public function create(){
       if(!auth()->user()->can('employee.create')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $roles=Role::all();
         return view('admin.user.create', compact('roles'));
     }
@@ -33,19 +33,21 @@ class UserController extends Controller
     public function store(Request $request){
       if(!auth()->user()->can('employee.store')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|max:100|email|unique:admins',
             'password' => 'required|min:6|confirmed',
+            // 'designation' => 'required|max:100',
         ]);
-    
+
         // Create New User
         $admin = new User();
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->password = Hash::make($request->password);
         $admin->status = 2;
+        $admin->designation = $request->designation;
         $admin->save();
 
         if ($request->roles) {
@@ -59,15 +61,15 @@ class UserController extends Controller
     {
       if(!auth()->user()->can('employee.edit')){
             abort(403, 'Unauthorized action.');
-        } 
-      
+        }
+
         $user = User::find($id);
         $roles  = Role::all();
         return view('admin.user.edit', compact('user', 'roles'));
     }
-    
+
     public function delete_user($id){
-       
+
          // Step 1: Find the user
     $user = User::find($id);
     // dd($user);
@@ -90,7 +92,7 @@ class UserController extends Controller
     public function update(Request $request, $id){
       if(!auth()->user()->can('employee.update')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $user = User::find($id);
 
         // Validation Data
@@ -120,14 +122,14 @@ class UserController extends Controller
     public function role_index(){
       if(!auth()->user()->can('role.index')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $roles = Role::all();
         return view('admin.user.role.index', compact('roles'));
     }
     public function role_create(){
       if(!auth()->user()->can('role.create')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $permissions=Permission::orderBy('id','DESC')->get();
         return view('admin.user.role.create', compact('permissions'));
 
@@ -136,8 +138,8 @@ class UserController extends Controller
     {
       if(!auth()->user()->can('role.edit')){
             abort(403, 'Unauthorized action.');
-        } 
-      
+        }
+
         $permissions = Permission::all();
         $role = Role::findById($id);
         return view('admin.user.role.edit', compact('role','permissions'));
@@ -147,7 +149,7 @@ class UserController extends Controller
     {
       if(!auth()->user()->can('role.update')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
          // Validation Data
          $request->validate([
             'name' => 'required|max:100|unique:roles,name,' . $id
@@ -172,8 +174,8 @@ class UserController extends Controller
     {
        if(!auth()->user()->can('role.delete')){
             abort(403, 'Unauthorized action.');
-        } 
-      
+        }
+
        Role::findOrFail($id)->delete();
 
        return back()->with('success', 'Role deleted success!');
@@ -183,7 +185,7 @@ class UserController extends Controller
     public function role_store(Request $request){
       if(!auth()->user()->can('role.store')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         // dd($request->all());
         $request->validate([
             'name'=> 'required|unique:roles'
@@ -195,30 +197,30 @@ class UserController extends Controller
         $role->syncPermissions($permissions);
     }
 
-    
+
     return redirect()->route('admin.user.role.index')->with('success','Role is Assign successfully!');
     }
     public function permission_index(){
      if(!auth()->user()->can('permission.index')){
             abort(403, 'Unauthorized action.');
-        } 
-        
+        }
+
        $rows=Permission::orderBy('id','DESC')->get();
        return view('admin.user.permission.index',compact('rows'));
     }
 
     public function permission_create(){
-        
+
      if(!auth()->user()->can('permission.create')){
             abort(403, 'Unauthorized action.');
-        } 
-      
+        }
+
         return view('admin.user.permission.create');
     }
     public function permission_store(Request $request){
        if(!auth()->user()->can('permission.store')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $request->validate([
             'name'=> 'required|unique:permissions'
     ]);
@@ -229,17 +231,17 @@ class UserController extends Controller
     public function permission_edit($id){
       if(!auth()->user()->can('permission.edit')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $permission = Permission::where('id', $id)->first();
         // dd($permission);
         return view('admin.user.permission.edit', compact('permission'));
     }
-    
+
 
     public function permission_Update(Request $request,  $id){
       if(!auth()->user()->can('permission.update')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $request->validate([
             'name'=> 'required|unique:permissions'
             ]);
@@ -254,7 +256,7 @@ class UserController extends Controller
     public function permission_delete($id){
       if(!auth()->user()->can('permission.delete')){
             abort(403, 'Unauthorized action.');
-        } 
+        }
         $permission = Permission::find($id);
         if (!is_null($permission)) {
             $permission->delete();
@@ -265,9 +267,9 @@ class UserController extends Controller
     }
 
     public function stuffPage(){
-        
+
         return view('admin.user.auth.login');
-        
+
     }
 
     public function storeStuffLogin(Request $request)
@@ -276,24 +278,24 @@ class UserController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-    
+
         // Attempt to authenticate the user with a status of 2
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 2, 'active_status' => 1])) {
-            
+
             return response()->json([
             'status' => true,
             'msg' => 'Successfully Login',
             'error' => 'Successfully Login',
             'url' => route('admin.dashboard')
         ]);
-          
-        } 
-    
+
+        }
+
         // return response()->json([
         //     'status' => false,
         //     'msg' => 'Invalid credentials',
         // ], 422);
-        
+
         return response()->json([
             'status' => false,
             'msg' => 'Invalid credentials',
@@ -305,12 +307,12 @@ class UserController extends Controller
 public function changeStatus($id){
         $user = User::find($id);
         if($user->active_status == 1){
-            
+
             $user->active_status = 0;
             $user->save();
             $message = trans('admin_validation.InActive Successfully');
         }else{
-            
+
             $user->active_status = 1;
             $user->save();
             $message = trans('admin_validation.Active Successfully');
@@ -321,8 +323,8 @@ public function changeStatus($id){
 
 public function stuffLogout(){
     Auth::logout();
-        
-        
+
+
     $notification= trans('admin_validation.Logout Successfully');
     $notification=array('messege'=>$notification,'alert-type'=>'success');
     return redirect()->route('admin.user.stuff.login')->with($notification);

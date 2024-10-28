@@ -11,9 +11,10 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    function blogDetails($slug, $id)
+    function blogDetails($category, $id)
     {
-        $blog = Blog::with('category', 'comments')->where('slug', $slug)->where('id', $id)->first();
+        $categoryId = BlogCategory::where('slug', $category)->first();
+        $blog = Blog::with('category', 'comments')->where('blog_category_id', $categoryId->id)->where('id', $id)->first();
         $blog->increment("views", 1);
 
         $relatedBlogs = Blog::with('category', 'comments')->where('status', 1)->where('id', '!=', $id)->where('blog_category_id', $blog->blog_category_id)->take(9)->get();

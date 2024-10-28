@@ -26,6 +26,10 @@
                             @method('PUT')
                             <div class="row">
                                 <div class="form-group col-12">
+                                    <label>Date and Time<span class="text-danger">*</span></label>
+                                    <input type="datetime-local" class="form-control"  name="date_time"  value="{{ \Carbon\Carbon::parse($blog->date_time)->format('Y-m-d\TH:i') }}">
+                                </div>
+                                <div class="form-group col-12">
                                     <label>{{__('admin.Thumbnail Image Preview')}}</label>
                                     <div>
                                         <img id="preview-img" class="admin-img" src="{{ asset($blog->image) }}" alt="">
@@ -42,10 +46,10 @@
                                     <input type="text" id="title" class="form-control"  name="title" value="{{ $blog->title }}">
                                 </div>
 
-                                <div class="form-group col-12">
+                                {{-- <div class="form-group col-12">
                                     <label>{{__('admin.Slug')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="slug" class="form-control"  name="slug" value="{{ $blog->slug }}">
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group col-12">
                                     <label>{{__('admin.Category')}} <span class="text-danger">*</span></label>
@@ -63,18 +67,21 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label>{{__('admin.Show Homepage ?')}}  <span class="text-danger">*</span></label>
+                                    <label>Is Cover?<span class="text-danger"></span></label>
                                     <select name="show_homepage" class="form-control">
-                                        <option {{ $blog->show_homepage == 0 ? 'selected' : '' }} value="0">{{__('admin.No')}}</option>
-                                        <option {{ $blog->show_homepage == 1 ? 'selected' : '' }} value="1">{{__('admin.Yes')}}</option>
+                                        <option value="">No</option>
+                                        <option {{ $blog->show_homepage == 'cover1' ? 'selected' : '' }} value="cover1">Cover 1</option>
+                                        <option {{ $blog->show_homepage == 'cover2' ? 'selected' : '' }} value="cover2">Cover 2</option>
+                                        <option {{ $blog->show_homepage == 'cover3' ? 'selected' : '' }} value="cover3">Cover 3</option>
+                                        <option {{ $blog->show_homepage == 'cover4' ? 'selected' : '' }} value="cover4">Cover 4</option>
                                     </select>
                                 </div>
 
-                                <div class="form-group col-12">
+                                <div class="form-group col-12 d-none">
                                     <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>
                                     <select name="status" class="form-control">
-                                        <option {{ $blog->status == 1 ? 'selected' : '' }} value="1">{{__('admin.Active')}}</option>
                                         <option {{ $blog->status == 0 ? 'selected' : '' }} value="0">{{__('admin.Inactive')}}</option>
+                                        <option {{ $blog->status == 1 ? 'selected' : '' }} value ='1' >{{__('admin.Active')}}</option>
                                     </select>
                                 </div>
 

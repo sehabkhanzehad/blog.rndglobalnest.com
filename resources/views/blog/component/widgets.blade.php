@@ -45,7 +45,7 @@
                             <div class="widget-list">
                                 <article class="card mb-4">
                                     <a
-                                        href="{{ route('front.blog.details', ['id' => $recommendedBlogs[0]->blog->id, 'slug' => $recommendedBlogs[0]->blog->slug]) }}">
+                                        href="{{ route('front.blog.details', ['category' => $recommendedBlogs[0]->blog->category->slug, 'id' => $recommendedBlogs[0]->blog->id ]) }}">
                                         <div class="card-image">
                                             <div class="post-info"> <span
                                                     class="text-uppercase">{{ $recommendedBlogs[0]->blog->views }}
@@ -58,12 +58,12 @@
                                     </a>
                                     <div class="card-body px-0 pb-1">
                                         <h3><a class="post-title post-title-sm"
-                                                href="{{ route('front.blog.details', ['id' => $recommendedBlogs[0]->blog->id, 'slug' => $recommendedBlogs[0]->blog->slug]) }}">{{ $recommendedBlogs[0]->blog->title }}</a>
+                                                href="{{ route('front.blog.details', ['category' => $recommendedBlogs[0]->blog->category->slug, 'id' => $recommendedBlogs[0]->blog->id]) }}">{{ $recommendedBlogs[0]->blog->title }}</a>
                                         </h3>
                                         {{-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit, sed do eiusmod tempor …</p> --}}
                                         <div class="content"> <a class="read-more-btn"
-                                                href="{{ route('front.blog.details', ['id' => $recommendedBlogs[0]->blog->id, 'slug' => $recommendedBlogs[0]->blog->slug]) }}">Read
+                                                href="{{ route('front.blog.details', ['category' => $recommendedBlogs[0]->blog->category->slug, 'id' => $recommendedBlogs[0]->blog->id]) }}">Read
                                                 Full
                                                 Article</a>
                                         </div>
@@ -75,7 +75,7 @@
                                             @continue
                                         @endif
                                         <a class="media align-items-center"
-                                            href="{{ route('front.blog.details', ['id' => $blog->blog->id, 'slug' => $blog->blog->slug]) }}">
+                                            href="{{ route('front.blog.details', ['category' => $blog->blog->category->slug, 'id' => $blog->blog->id]) }}">
                                             <img loading="lazy" decoding="async" src="{{ asset($blog->blog->image) }}"
                                                 alt="Post Thumbnail" class="w-100">
                                             <div class="media-body ml-3">
@@ -97,7 +97,7 @@
                         <div class="widget-list">
                             <article class="card mb-4">
                                 <a
-                                    href="{{ route('front.blog.details', ['id' => $popularFirstBlog->id, 'slug' => $popularFirstBlog->slug]) }}">
+                                    href="{{ route('front.blog.details', ['category' => $popularFirstBlog->category->slug, 'id' => $popularFirstBlog->id]) }}">
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase">{{ $popularFirstBlog->views }} Views</span>
@@ -109,12 +109,12 @@
                                 </a>
                                 <div class="card-body px-0 pb-1">
                                     <h3><a class="post-title post-title-sm"
-                                            href="{{ route('front.blog.details', ['id' => $popularFirstBlog->id, 'slug' => $popularFirstBlog->slug]) }}">{{ $popularFirstBlog->title }}</a>
+                                            href="{{ route('front.blog.details', ['category' => $popularFirstBlog->category->slug, 'id' => $popularFirstBlog->id]) }}">{{ $popularFirstBlog->title }}</a>
                                     </h3>
                                     {{-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur
                                         adipiscing elit, sed do eiusmod tempor …</p> --}}
                                     <div class="content"> <a class="read-more-btn"
-                                            href="{{ route('front.blog.details', ['id' => $popularFirstBlog->id, 'slug' => $popularFirstBlog->slug]) }}">Read
+                                            href="{{ route('front.blog.details', ['category' => $popularFirstBlog->category->slug, 'id' => $popularFirstBlog->id]) }}">Read
                                             Full
                                             Article</a>
                                     </div>
@@ -125,7 +125,7 @@
                                     @continue
                                 @endif
                                 <a class="media align-items-center"
-                                    href="{{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}">
+                                    href="{{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}">
                                     <img loading="lazy" decoding="async" src="{{ asset($blog->image) }}"
                                         alt="Post Thumbnail" class="w-100">
                                     <div class="media-body ml-3">

@@ -13,7 +13,7 @@
             @forelse ($categoryWithBlogs->blogs as $blog)
             <div class="col-md-6 mb-4">
                 <article class="card article-card article-card-sm h-100">
-                    <a href="{{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}">
+                    <a href="{{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}">
                         <div class="card-image">
                             <div class="post-info"> <span class="text-uppercase">{{ $blog->created_at->diffForHumans() }}</span>
                                 <span class="text-uppercase">{{ $blog->views }} Views</span>
@@ -28,10 +28,10 @@
                                 <a href="{{ route("front.blog.categoryWiseBlogs", $blog->category->slug) }}">{{ $categoryWithBlogs->name }}</a>
                             </li>
                         </ul>
-                        <h2><a class="post-title" href="{{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}">{{ $blog->title }}</a></h2>
+                        <h2><a class="post-title" href="{{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}">{{ $blog->title }}</a></h2>
                         {{-- <p class="card-text">Heading Here is example of hedings. You can use this
                             heading by following markdownify rules. For example: use # for …</p> --}}
-                        <div class="content"> <a class="read-more-btn" href="{{ route('front.blog.details', ['id' => $blog->id, 'slug' => $blog->slug]) }}">Read Full
+                        <div class="content"> <a class="read-more-btn" href="{{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}">Read Full
                                 Article</a>
                         </div>
                     </div>

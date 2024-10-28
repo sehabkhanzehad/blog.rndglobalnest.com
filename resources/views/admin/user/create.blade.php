@@ -27,10 +27,14 @@
                     <input type="text" class="form-control" id="name" placeholder="Enter User Name" name="name" required>
                   </div>
                   <div class="form-group">
+                    <label for="name">Designation</label>
+                    <input type="text" class="form-control" id="designation" placeholder="Enter Designation" name="designation" required>
+                  </div>
+                  <div class="form-group">
                     <label for="email">Employee Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Enter Email " name="email">
                   </div>
-                  
+
                   <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="password">Assign Roles</label>
@@ -72,4 +76,4 @@
                         </div>
                         </div> </div>
 </div>
-@endsection 
+@endsection
