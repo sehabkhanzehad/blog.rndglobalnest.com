@@ -20,7 +20,7 @@ class DashboardController extends Controller
     public function dashobard()
     {
         if (!auth()->user()->can('admin.dashboard')) {
-            return redirect()->route('admin.login');
+            return redirect()->route('front.login');
             // abort(403, 'Unauthorized action.');
         }
         $setting = Setting::first();
