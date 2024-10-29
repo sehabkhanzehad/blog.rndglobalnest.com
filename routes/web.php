@@ -46,8 +46,7 @@ use App\Http\Controllers\WEB\Admin\HomeBottomSettingController;
 use App\Http\Controllers\WEB\Admin\IPBlockController;
 
 use App\Http\Controllers\WEB\Admin\CollectionBannerController;
-
-
+use App\Http\Controllers\WEB\Admin\CoversBlogController;
 //Frontend
 use App\Http\Controllers\WEB\Frontend\Auth\AuthController as FrontAuthController;
 use App\Http\Controllers\WEB\Frontend\Blog\BlogController as BlogBlogController;
@@ -158,6 +157,9 @@ Route::group(['middleware' => ['demo', 'XSS']], function () {
 
         Route::resource('/recommended-blog', PopularBlogController::class)->names('popular-blog'); // Add
         Route::put('popular-blog-status/{id}', [PopularBlogController::class, 'changeStatus'])->name('popular-blog.status');
+
+        Route::resource('/covers-blog', CoversBlogController::class)->names('covers-blog'); // Add
+        // Route::put('popular-blog-status/{id}', [PopularBlogController::class, 'changeStatus'])->name('popular-blog.status');
 
         Route::resource('blog-comment', BlogCommentController::class); // Add
         Route::put('blog-comment-status/{id}', [BlogCommentController::class, 'changeStatus'])->name('blog-comment.status');

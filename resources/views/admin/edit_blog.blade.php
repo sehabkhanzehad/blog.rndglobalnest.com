@@ -66,7 +66,7 @@
                                     <textarea name="description" id="" cols="30" rows="10" class="summernote">{{ $blog->description }}</textarea>
                                 </div>
 
-                                <div class="form-group col-12">
+                                {{-- <div class="form-group col-12">
                                     <label>Is Cover?<span class="text-danger"></span></label>
                                     <select name="show_homepage" class="form-control">
                                         <option value="">No</option>
@@ -75,7 +75,7 @@
                                         <option {{ $blog->show_homepage == 'cover3' ? 'selected' : '' }} value="cover3">Cover 3</option>
                                         <option {{ $blog->show_homepage == 'cover4' ? 'selected' : '' }} value="cover4">Cover 4</option>
                                     </select>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group col-12 d-none">
                                     <label>{{__('admin.Status')}} <span class="text-danger">*</span></label>

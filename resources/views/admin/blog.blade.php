@@ -37,65 +37,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{-- <tr>
-                                                <td colspan="8" class="text-center"><span class="" style="font-size: 25px" >Covers Blog</span></td>
-                                            </tr> --}}
-                                            {{-- @foreach ($covers as $index => $blog)
-                                                <tr>
-                                                    <td>{{ ++$index }}</td>
-                                                    <td><a
-                                                            href="">{{ $blog->title }}</a>
-                                                    </td>
-                                                    <td>{{ $blog->category->name }}</td>
-                                                    <td><img src="{{ asset($blog->image) }}" width="80px" height="80px"
-                                                            class="rounded-circle" alt=""></td>
 
-                                                    <td>
-                                                        @if ($blog->show_homepage != null)
-                                                            <span class="badge badge-success">{{ $blog->show_homepage }}</span>
-                                                        @else
-                                                        <span class="badge badge-danger">{{__('admin.No')}}</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($blog->status == 1)
-                                                            <a href="javascript:;"
-                                                                onclick="changeBlogStatus({{ $blog->id }})">
-                                                                <input id="status_toggle" type="checkbox" checked
-                                                                    data-toggle="toggle" data-on="{{ __('admin.Active') }}"
-                                                                    data-off="{{ __('admin.Inactive') }}"
-                                                                    data-onstyle="success" data-offstyle="danger">
-                                                            </a>
-                                                        @else
-                                                            <a href="javascript:;"
-                                                                onclick="changeBlogStatus({{ $blog->id }})">
-                                                                <input id="status_toggle" type="checkbox"
-                                                                    data-toggle="toggle" data-on="{{ __('admin.Active') }}"
-                                                                    data-off="{{ __('admin.Inactive') }}"
-                                                                    data-onstyle="success" data-offstyle="danger">
-                                                            </a>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('admin.blog.edit', $blog->id) }}"
-                                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"
-                                                                aria-hidden="true"></i></a>
-                                                        <a href="javascript:;" data-toggle="modal"
-                                                            data-target="#deleteModal" class="btn btn-danger btn-sm"
-                                                            onclick="deleteData({{ $blog->id }})"><i
-                                                                class="fa fa-trash" aria-hidden="true"></i></a>
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach --}}
-                                            {{-- <tr>
-                                                <td colspan="8" class="text-center"><span class="" style="font-size: 25px" >All Blog</span></td>
-                                            </tr> --}}
                                             @foreach ($blogs as $index => $blog)
                                                 <tr>
                                                     <td>{{ ++$index }}</td>
-                                                    <td><a
-                                                            href="">{{ $blog->title }}</a>
+                                                    <td><a href="">{{ $blog->title }}</a>
                                                     </td>
                                                     <td>{{ $blog->category->name }}</td>
                                                     <td><img src="{{ asset($blog->image) }}" width="80px" height="80px"
@@ -107,22 +53,40 @@
                                                         <span class="badge badge-danger">{{__('admin.No')}}</span>
                                                         @endif
                                                     </td> --}}
+
                                                     <td>
-                                                        @if ($blog->show_homepage != null)
-                                                            <span class="badge badge-success">{{ $blog->show_homepage }}</span>
+                                                        @if (\App\Models\CoverBlog::where('blog_id', $blog->id)->first())
+                                                            <span
+                                                                class="badge badge-success">{{ \App\Models\CoverBlog::where('blog_id', $blog->id)->first()->is_cover }}</span>
                                                         @else
-                                                        <span class="badge badge-danger">{{__('admin.No')}}</span>
+                                                            <span class="badge badge-danger">{{ __('admin.No') }}</span>
                                                         @endif
                                                     </td>
+
                                                     <td>
                                                         @if ($blog->status == 1)
-                                                            <a href="javascript:;"
-                                                                onclick="changeBlogStatus({{ $blog->id }})">
-                                                                <input id="status_toggle" type="checkbox" checked
-                                                                    data-toggle="toggle" data-on="{{ __('admin.Active') }}"
-                                                                    data-off="{{ __('admin.Inactive') }}"
-                                                                    data-onstyle="success" data-offstyle="danger">
-                                                            </a>
+                                                            @if (\App\Models\CoverBlog::where('blog_id', $blog->id)->exists())
+                                                                <a href="javascript:;" onclick="notChange()">
+                                                                    <input id="status_toggle" type="checkbox" checked
+                                                                        data-toggle="toggle"
+                                                                        data-on="{{ __('admin.Active') }}"
+                                                                        data-off="{{ __('admin.Inactive') }}"
+                                                                        data-onstyle="success"
+                                                                        {{ \App\Models\CoverBlog::where('blog_id', $blog->id)->first() ? 'disabled' : '' }}
+                                                                        data-offstyle="danger">
+                                                                </a>
+                                                            @else
+                                                                <a href="javascript:;"
+                                                                    onclick="changeBlogStatus({{ $blog->id }})">
+                                                                    <input id="status_toggle" type="checkbox" checked
+                                                                        data-toggle="toggle"
+                                                                        data-on="{{ __('admin.Active') }}"
+                                                                        data-off="{{ __('admin.Inactive') }}"
+                                                                        data-onstyle="success"
+                                                                        {{ \App\Models\CoverBlog::where('blog_id', $blog->id)->first() ? 'disabled' : '' }}
+                                                                        data-offstyle="danger">
+                                                                </a>
+                                                            @endif
                                                         @else
                                                             <a href="javascript:;"
                                                                 onclick="changeBlogStatus({{ $blog->id }})">
@@ -137,10 +101,17 @@
                                                         <a href="{{ route('admin.blog.edit', $blog->id) }}"
                                                             class="btn btn-primary btn-sm"><i class="fa fa-edit"
                                                                 aria-hidden="true"></i></a>
+                                                        @if (\App\Models\CoverBlog::where('blog_id', $blog->id)->exists())
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                           class="btn btn-danger btn-sm"
+                                                            onclick="notDelete()"><i
+                                                                class="fa fa-trash" aria-hidden="true"></i></a>
+                                                        @else
                                                         <a href="javascript:;" data-toggle="modal"
                                                             data-target="#deleteModal" class="btn btn-danger btn-sm"
                                                             onclick="deleteData({{ $blog->id }})"><i
                                                                 class="fa fa-trash" aria-hidden="true"></i></a>
+                                                        @endif
                                                     </td>
 
                                                 </tr>
@@ -158,6 +129,14 @@
     <script>
         function deleteData(id) {
             $("#deleteForm").attr("action", '{{ url('admin/blog/') }}' + "/" + id)
+        }
+
+        function notDelete() {
+            toastr.error('This Blog Is Cover Blog. You Can Not Delete');
+        }
+
+        function notChange() {
+            toastr.error('This Blog Is Cover Blog. You Can Not Change Status');
         }
 
         function changeBlogStatus(id) {

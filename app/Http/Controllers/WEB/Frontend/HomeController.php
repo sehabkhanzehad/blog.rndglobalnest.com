@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Product;
 use App\Models\ChildCategory;
+use App\Models\CoverBlog;
 use App\Models\FlashSaleProduct;
 use App\Models\HomeBottomSetting;
 use App\Models\CustomPage;
@@ -23,7 +24,7 @@ class HomeController extends Controller
     {
         $latestBlogs = Blog::with('category', 'comments', 'admin')
             ->where('status', 1)
-            ->latest()
+            ->orderBy('date_time', 'desc')
             ->paginate(10);
 
         $popularFirstBlog = Blog::with('category', 'comments', 'admin')
@@ -37,26 +38,24 @@ class HomeController extends Controller
 
         return view('blog.pages.index', [
             "home_bottom_settings" => HomeBottomSetting::all(),
-            "latestFirstBlog" => Blog::with('category', 'comments', 'admin')->where('status', 1)->latest()->first(),
-            "cover1" => Blog::with('category', 'comments', 'admin')
-                            ->where('show_homepage', 'cover1')
-                            ->where('status', 1)
-                            ->first(),
-        
-            "cover2" => Blog::with('category', 'comments', 'admin')
-                            ->where('show_homepage', 'cover2')
-                            ->where('status', 1)
+            "latestFirstBlog" => Blog::with('category', 'comments', 'admin')->where('status', 1)->orderBy('date_time', 'desc')->first(),
+            "cover1" => CoverBlog::with('blog')
+                            ->where('is_cover', 'cover1')
                             ->first(),
 
-            "cover3" => Blog::with('category', 'comments', 'admin')
-                            ->where('show_homepage', 'cover3')
-                            ->where('status', 1)
+            "cover2" => CoverBlog::with('blog')
+                            ->where('is_cover', 'cover2')
                             ->first(),
 
-            "cover4" => Blog::with('category', 'comments', 'admin')
-                            ->where('show_homepage', 'cover4')
-                            ->where('status', 1)
+            "cover3" => CoverBlog::with('blog')
+                            ->where('is_cover', 'cover3')
                             ->first(),
+
+            "cover4" => CoverBlog::with('blog')
+                            ->where('is_cover', 'cover4')
+                            ->first(),
+
+
 
             "latestBlogs" => $latestBlogs,
             "categories" => BlogCategory::with([

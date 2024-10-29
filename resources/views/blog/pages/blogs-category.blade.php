@@ -15,7 +15,7 @@
                 <article class="card article-card article-card-sm h-100">
                     <a href="{{ route('front.blog.details', ['category' => $blog->category->slug, 'id' => $blog->id]) }}">
                         <div class="card-image">
-                            <div class="post-info"> <span class="text-uppercase">{{ $blog->created_at->diffForHumans() }}</span>
+                            <div class="post-info"> <span class="text-uppercase">{{ date('d M Y', strtotime($blog->date_time)) }}</span>
                                 <span class="text-uppercase">{{ $blog->views }} Views</span>
                             </div>
                             <img loading="lazy" decoding="async" src="{{ asset($blog->image) }}" alt="Post Thumbnail"

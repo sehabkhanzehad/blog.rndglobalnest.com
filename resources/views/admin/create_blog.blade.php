@@ -70,7 +70,7 @@
 
                                 <div class="form-group col-12">
                                     <label>Is cover?<span class="text-danger">*</span></label>
-                                    <select name="show_homepage" class="form-control">
+                                    <select name="is_cover" class="form-control">
                                         <option value="">No</option>
                                         <option value="cover1">Cover 1</option>
                                         <option value="cover2">Cover 2</option>
