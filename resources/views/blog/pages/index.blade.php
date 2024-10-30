@@ -212,11 +212,6 @@
             </div>
             <div class="row">
                 @foreach ($latestBlogs as $blog)
-                    @if ($cover1 == null)
-                        @if ($loop->first)
-                            @continue
-                        @endif
-                    @endif
                     <div class="col-md-6 mb-4">
                         <article class="card article-card article-card-sm h-100">
                             <a

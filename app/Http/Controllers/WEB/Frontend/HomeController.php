@@ -25,7 +25,7 @@ class HomeController extends Controller
         $latestBlogs = Blog::with('category', 'comments', 'admin')
             ->where('status', 1)
             ->orderBy('date_time', 'desc')
-            ->paginate(10);
+            ->paginate(30);
 
         $popularFirstBlog = Blog::with('category', 'comments', 'admin')
             ->where('status', 1)
